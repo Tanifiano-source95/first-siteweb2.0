@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AFIWANUISIBLES.FR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1F4D3D;
+    --forest-light:#2E6B54;
+    --paper:#FFFFFF;
+    --paper-2:#F4F6F2;
+    --amber:#E3A23B;
+    --amber-dark:#C6812A;
+    --line:#E1E4DC;
+    --text:#16241D;
+    --text-soft:#4C5B52;
+    --white:#FFFFFF;
+    --radius:14px;
+    --font-display:'Playfair Display', serif;
+    --font-body:'Lora', serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0; font-family:var(--font-body); color:var(--text); background:var(--white); -webkit-font-smoothing:antialiased;}
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  ul{margin:0; padding:0; list-style:none;}
+  h1,h2,h3,h4{font-family:var(--font-display); margin:0; line-height:1.15;}
+  p{margin:0;}
+  section{padding:72px 0;}
+  .container{width:100%; max-width:1180px; margin:0 auto; padding:0 24px;}
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    font-family:var(--font-body); font-weight:600; font-size:15px;
+    padding:14px 26px; border-radius:999px; border:1px solid transparent;
+    cursor:pointer; transition:transform .15s ease, background .2s ease, border-color .2s ease;
+    white-space:nowrap;
+  }
+  .btn:hover{transform:translateY(-2px);}
+  .btn-primary{background:var(--amber); color:var(--text);}
+  .btn-primary:hover{background:var(--amber-dark);}
+  .btn-outline{background:transparent; color:var(--forest); border-color:var(--forest);}
+  .btn-outline:hover{background:var(--forest); color:var(--white);}
+
+  /* ===================== TOP BAR ===================== */
+  .top-bar{background:#001429;}
+  .top-bar-inner{
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+    padding:9px 24px; flex-wrap:wrap;
+  }
+  .top-bar-item{
+    display:flex; align-items:center; gap:7px;
+    font-size:12.5px; color:#C7D2E0; white-space:nowrap;
+  }
+  .top-bar-item svg{width:14px; height:14px; color:#E76020; flex:none;}
+
+  /* ===================== HEADER ===================== */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:#001429;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .header-row{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 0; gap:14px;
+  }
+  .logo{
+    font-family:var(--font-display); font-weight:700; font-size:20px;
+    color:#ffffff;
+    display:flex; align-items:center; gap:10px;
+    min-width:0;
+  }
+  .logo span{overflow:hidden; text-overflow:ellipsis;}
+  .logo .accent-name{color:#E76020;}
+  .logo .mark{
+    width:38px; height:38px; border-radius:50%;
+    flex:none; object-fit:contain;
+  }
+  .header-actions{display:flex; align-items:center; gap:16px;}
+  .phone-link{font-size:14px; font-weight:600; color:#ffffff;}
+  .nav-toggle{display:none; background:none; border:none; color:#ffffff; font-size:22px; cursor:pointer;}
+
+  nav.service-nav{
+    display:flex; align-items:center; justify-content:center; gap:28px;
+    padding:14px 0; border-top:1px solid rgba(255,255,255,.1); flex-wrap:wrap;
+  }
+  nav.service-nav a{
+    font-size:13px; font-weight:600; letter-spacing:.04em; text-transform:uppercase;
+    color:#C7D2E0;
+  }
+  nav.service-nav a:hover{color:#E76020;}
+
+  /* ===================== HERO ===================== */
+  .hero{background:var(--white); overflow:hidden;}
+  .hero-banner{
+    display:grid; grid-template-columns:minmax(320px,44%) 1fr; align-items:stretch;
+  }
+  .hero-copy{
+    display:flex; flex-direction:column; justify-content:flex-start; gap:18px;
+    padding:0 6vw;
+  }
+  .hero-heading{
+    font-size:clamp(30px,3.6vw,42px); line-height:1.18; color:var(--text);
+  }
+  .hero-heading .accent{color:var(--amber-dark); font-style:normal;}
+  .hero-sub{display:flex; flex-direction:column; gap:6px;}
+  .hero-sub p{font-size:15.5px; line-height:1.6; color:var(--text-soft);}
+  .hero-photo{
+    position:relative; min-height:340px;
+  }
+  .hero-photo img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* ===================== SERVICES ===================== */
+  .services-grid{
+    display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+  }
+  .service-card{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:26px 24px;
+  }
+  .service-card h3{font-size:17px; margin-bottom:12px; color:var(--forest);}
+  .service-card p{font-size:14.5px; color:#000000; line-height:1.6;}
+
+  .pest-gallery{
+    margin-top:20px;
+    display:grid; grid-template-columns:repeat(auto-fit, minmax(150px, 1fr)); gap:16px;
+  }
+  .pest-card{
+    border:1px solid var(--line); border-radius:var(--radius); overflow:hidden;
+    background:var(--white); text-align:center;
+  }
+  .pest-card img{width:100%; aspect-ratio:4/3; height:auto; object-fit:cover; display:block;}
+  .pest-card h4{
+    font-family:var(--font-body); font-weight:700; font-size:13px; text-transform:uppercase;
+    color:var(--amber-dark); margin:14px 12px 6px;
+  }
+  .pest-card p{font-size:12.5px; color:#000000; line-height:1.5; margin:0 12px 16px;}
+
+  /* ===================== CONTACT ===================== */
+  .contact{background:var(--paper-2); border-top:1px solid var(--line);}
+  .contact-grid{display:grid; grid-template-columns:.9fr 1.1fr; gap:48px;}
+  .contact-info{display:flex; flex-direction:column; gap:18px;}
+  .info-block a.big{font-family:var(--font-display); font-size:22px; color:var(--forest);}
+  form.quote-form{
+    background:var(--white); border:1px solid var(--line); border-radius:var(--radius);
+    padding:28px; display:grid; gap:14px;
+  }
+  .form-row{display:grid; grid-template-columns:1fr 1fr; gap:14px;}
+  label{font-size:13px; font-weight:600; margin-bottom:6px; display:block;}
+  input, textarea{
+    width:100%; padding:12px 14px; border-radius:9px; border:1px solid var(--line);
+    font-family:var(--font-body); font-size:14.5px; background:var(--white); color:var(--text);
+  }
+  input:focus, textarea:focus{outline:2px solid var(--forest); outline-offset:1px; border-color:transparent;}
+  textarea{resize:vertical; min-height:90px;}
+
+  /* Champ piège anti-robots : invisible pour un humain, présent dans le code pour les robots */
+  .hp-field{
+    position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;
+  }
+
+  .consent-row{
+    display:flex; align-items:flex-start; gap:10px; font-size:12.5px;
+    font-weight:400; color:var(--text-soft); line-height:1.5; cursor:pointer;
+  }
+  .consent-row input{width:auto; margin-top:2px; flex:none; cursor:pointer;}
+  .consent-row a{color:var(--forest); text-decoration:underline;}
+
+  .form-success{
+    display:none; background:#E7F0EA; border:1px solid var(--forest-light);
+    color:var(--forest); padding:12px 16px; border-radius:9px; font-size:14px;
+  }
+
+  /* ===================== FOOTER ===================== */
+  footer{background:#001429; border-top:1px solid rgba(255,255,255,.08); padding:32px 0;}
+  .footer-row{display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;}
+  .footer-row nav{display:flex; gap:20px; flex-wrap:wrap;}
+  .footer-row nav a{font-size:13px; color:#C7D2E0;}
+  .footer-row nav a:hover{color:#E76020;}
+  .footer-row .copyright{font-size:12.5px; color:#C7D2E0;}
+
+  /* ===================== RESPONSIVE ===================== */
+  @media (max-width:980px){
+    .hero-banner{grid-template-columns:1fr;}
+    .hero-copy{padding:40px 24px;}
+    .hero-photo{min-height:260px;}
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .contact-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:720px){
+    .top-bar-inner{gap:14px 20px; padding:8px 16px;}
+    .top-bar-item{font-size:11.5px;}
+    nav.service-nav{
+      position:absolute; top:100%; left:0; right:0; background:#001429;
+      flex-direction:column; align-items:flex-start; padding:16px 24px; gap:14px;
+      border-top:1px solid rgba(255,255,255,.1); display:none;
+    }
+    nav.service-nav.open{display:flex;}
+    .nav-toggle{display:block;}
+    .phone-link{display:none;}
+    .logo{font-size:15px;}
+    .logo .mark{width:30px; height:30px;}
+    .header-actions{gap:10px;}
+    .header-actions .btn-primary{padding:10px 16px; font-size:13px;}
+    .services-grid{grid-template-columns:1fr;}
+    .pest-gallery{grid-template-columns:repeat(2,1fr);}
+    .form-row{grid-template-columns:1fr;}
+    section{padding:48px 0;}
+  }
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="container top-bar-inner">
+    <div class="top-bar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s7-6.5 7-12a7 7 0 1 0-14 0c0 5.5 7 12 7 12z"/><circle cx="12" cy="9" r="2.5"/></svg>
+      <span>Expert anti-nuisibles en Île-de-France</span>
+    </div>
+    <div class="top-bar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/></svg>
+      <span>Techniciens certifiés</span>
+    </div>
+    <div class="top-bar-item">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      <span>Intervention rapide 7j/7 et 24h/24</span>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="container header-row">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="Logo AFIWA Nuisibles" class="mark">
+      <span>afiwa<span class="accent-name">nuisibles.fr</span></span>
+    </a>
+    <div class="header-actions">
+      <a href="tel:+33746538830" class="phone-link">+33 07 46 53 88 30</a>
+      <a href="#contact" class="btn btn-primary">Devis gratuit</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu">☰</button>
+    </div>
+  </div>
+  <nav class="service-nav" id="serviceNav">
+    <a href="#deratisation">Dératisation</a>
+    <a href="#desinsectisation">Désinsectisation</a>
+    <a href="#desinfection">Désinfection</a>
+    <a href="#depigeonnage">Dépigeonnage</a>
+    <a href="#location">Location de piège</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="hero-banner">
+    <div class="hero-copy">
+      <h1 class="hero-heading">Votre expert<br><span class="accent">anti-nuisibles</span><br>en Île-de-France</h1>
+      <div class="hero-sub">
+        <p>Éradication des rats, souris, cafards, punaises de lit, fourmis, guêpes, frelons, pigeons…</p>
+        <p>Des solutions efficaces et durables pour un environnement sain et sécurisé.</p>
+      </div>
+    </div>
+    <div class="hero-photo">
+      <img src="techniciens-cuisine.jpeg" alt="Technicien AFIWA NUISIBLES en intervention dans une cuisine">
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="container">
+    <div class="services-grid">
+
+      <div class="service-card" id="deratisation">
+        <h3>Dératisation</h3>
+        <p>Nous éliminons rapidement les rats et les souris et certains types de rongeurs de votre logement, de votre commerce ou de vos locaux professionnels. Après une inspection des lieux par nos techniciens certifiés. Nous mettons ensuite en œuvre une solution adaptée afin d'éradiquer l'infestation et de limiter les risques de réapparition.</p>
+      </div>
+
+      <div class="service-card" id="desinsectisation">
+        <h3>Désinsectisation</h3>
+        <p>Nos traitements ciblent efficacement les cafards et blattes, punaises de lits, fourmis, guêpes et frelons et plusieurs types d'insectes même dans les zones difficiles d'accès. Nous identifions les points d'entrée et utilisons des méthodes adaptées pour éliminer l'infestation et prévenir leur retour.</p>
+      </div>
+
+      <div class="service-card" id="desinfection">
+        <h3>Désinfection</h3>
+        <p>Nous réalisons des prestations de désinfection pour réduire la présence de bactéries, virus et autres micro-organismes sur les surfaces, dans les logements, commerces et locaux professionnels.</p>
+      </div>
+
+      <div class="service-card" id="depigeonnage">
+        <h3>Dépigeonnage</h3>
+        <p>AFIWA Nuisibles propose des solutions de dépigeonnage respectueuses de la réglementation afin de protéger les bâtiments contre les nuisances causées par les pigeons. Nous installons des dispositifs adaptés pour empêcher leur installation durable, tout en préservant l'intégrité des bâtiments. Pose de dispositifs anti-pigeons (pics, filets, câbles tendus, etc.).</p>
+      </div>
+
+      <div class="service-card" id="location">
+        <h3>Location de stations multi-captures pour rats et souris</h3>
+        <p>AFIWA Nuisibles propose la location de stations multi-captures de type Ekomille pour la surveillance et le contrôle des populations de rats. Cette solution est particulièrement adaptée aux entreprises, entrepôts, copropriétés, collectivités et sites sensibles souhaitant une protection efficace avec un suivi régulier assuré par nos techniciens.</p>
+      </div>
+
+    </div>
+
+    <div class="pest-gallery">
+      <div class="pest-card">
+        <img src="rat.jpeg" alt="Rat">
+        <h4>Dératisation</h4>
+        <p>Élimination des rats et souris. Inspection, traitement et prévention.</p>
+      </div>
+      <div class="pest-card">
+        <img src="cafard.jpeg" alt="Cafard">
+        <h4>Désinsectisation</h4>
+        <p>Éradication des cafards, fourmis, puces, mites et autres insectes nuisibles.</p>
+      </div>
+      <div class="pest-card">
+        <img src="punaise-de-lit.jpeg" alt="Punaises de lit">
+        <h4>Punaises de lit</h4>
+        <p>Détection et traitement spécifique contre les punaises de lit.</p>
+      </div>
+      <div class="pest-card">
+        <img src="station-multicaptures.jpeg" alt="Station multi-captures Ekomille">
+        <h4>Location de pièges multicaptures (Ekomille)</h4>
+        <p>Location de pièges professionnels pour la capture de rats et souris. Idéal pour un suivi efficace.</p>
+      </div>
+      <div class="pest-card">
+        <img src="guepe.jpeg" alt="Guêpe">
+        <h4>Guêpes &amp; frelons</h4>
+        <p>Destruction des nids de guêpes, frelons européens et asiatiques en toute sécurité.</p>
+      </div>
+      <div class="pest-card">
+        <img src="pigeon.jpeg" alt="Pigeon">
+        <h4>Dépigeonnage</h4>
+        <p>Solutions durables contre les pigeons : pics, filets, répulsifs et nettoyage.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="container contact-grid">
+    <div class="contact-info">
+      <div class="info-block">
+        <a class="big" href="tel:+33746538830">+33 07 46 53 88 30</a>
+      </div>
+      <div class="info-block">
+        <a href="mailto:contact@affiwanuisibles.fr">contact@affiwanuisibles.fr</a>
+      </div>
+    </div>
+
+    <form class="quote-form" id="quoteForm">
+      <div class="form-row">
+        <div>
+          <label for="name">Nom</label>
+          <input type="text" id="name" name="name" minlength="2" required>
+        </div>
+        <div>
+          <label for="phone">Téléphone</label>
+          <input type="tel" id="phone" name="phone" pattern="^(\+33|0)[1-9](\s?\d{2}){4}$" placeholder="06 00 00 00 00" title="Format attendu : 06 00 00 00 00 ou +33 6 00 00 00 00" required>
+        </div>
+      </div>
+      <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="message" minlength="10" placeholder="Décrivez votre besoin (10 caractères minimum)" required></textarea>
+      </div>
+
+      <!-- Champ piège anti-robots (honeypot) : invisible pour un humain, rempli uniquement par les robots -->
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Ne pas remplir ce champ</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="consent-row">
+        <input type="checkbox" id="consent" name="consent" required>
+        <span>J'accepte que mes données (nom, téléphone, message) soient utilisées par AFIWA Nuisibles pour me recontacter au sujet de ma demande. Voir notre <a href="politique-confidentialite.html" target="_blank" rel="noopener">politique de confidentialité</a>.</span>
+      </label>
+
+      <button type="submit" class="btn btn-primary" style="justify-self:start;">Envoyer</button>
+      <div class="form-success" id="formSuccess">Votre demande a bien été envoyée.</div>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-row">
+    <a href="#" class="logo">
+      <img src="logo.png" alt="Logo AFIWA Nuisibles" class="mark">
+      <span>afiwa<span class="accent-name">nuisibles.fr</span></span>
+    </a>
+    <nav>
+      <a href="#deratisation">Dératisation</a>
+      <a href="#desinsectisation">Désinsectisation</a>
+      <a href="#desinfection">Désinfection</a>
+      <a href="#depigeonnage">Dépigeonnage</a>
+      <a href="#location">Location de piège</a>
+      <a href="#contact">Contact</a>
+      <a href="politique-confidentialite.html">Politique de confidentialité</a>
+    </nav>
+    <span class="copyright">© 2026 AFIWANUISIBLES.FR</span>
+  </div>
+</footer>
+
+<script>
+  const navToggle = document.getElementById('navToggle');
+  const serviceNav = document.getElementById('serviceNav');
+  navToggle.addEventListener('click', () => serviceNav.classList.toggle('open'));
+  serviceNav.querySelectorAll('a').forEach(a => a.addEventListener('click', () => serviceNav.classList.remove('open')));
+
+  const form = document.getElementById('quoteForm');
+  const success = document.getElementById('formSuccess');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    // Si le champ piège est rempli, c'est un robot : on ignore silencieusement
+    const honeypot = document.getElementById('website');
+    if (honeypot && honeypot.value !== '') {
+      return;
+    }
+    success.style.display = 'block';
+    form.reset();
+  });
+</script>
+
+</body>
+</html>
